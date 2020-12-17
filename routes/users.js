@@ -4,8 +4,9 @@ const router = express.Router();
 const users = require('../models/users.model')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const welcomeMail = require('../controller/welcomeMail');
 
-router.post('/register', function (req,res) {
+router.post('/register',  function (req,res) {
   const user = {
     name: req.body.name,
     username: req.body.username,
@@ -13,8 +14,16 @@ router.post('/register', function (req,res) {
     mobile: req.body.mobile,
     password: req.body.password
   }
-  users.create(user)
-    .then(data => {
+   users.create(user)
+    .then(async data => {
+       await welcomeMail(
+         {
+           to : req.body.email,
+           subject: 'Welcome Mail',
+           body: 'Welcode to AndolaSoft'
+
+       })
+
       res.send(data);
     })
     .catch(err => {

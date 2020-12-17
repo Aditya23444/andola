@@ -10,11 +10,13 @@ const usersRouter = require('./routes/users');
 const productRouter = require('./routes/product');
 
 
+
 const db = require("./models/sequelize");
 
-db.sequelize.sync();
 
 const app = express();
+db.sequelize.sync();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
