@@ -6,20 +6,16 @@ const AuthenticateUser = require('../authentication');
 
 
 router.post('/create', AuthenticateUser, function (req,res) {
-const Product = {
-  name: req.body.name,
-  image: req.body.image ? req.body.image : '',
-  price: req.body.price
-}
-  product.create(Product)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Product."
-      });
-    });
+
+  product.create({
+    name: req.body.name,
+    image: req.body.image ? req.body.image : '',
+    price: req.body.price
+  }, function (err, result) {
+    if (err)
+      next(err);
+    else
+      res.json({status: "success", message: "product added successfully!!!", data: result});
+  });
 })
 module.exports = router;

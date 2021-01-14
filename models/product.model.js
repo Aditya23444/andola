@@ -1,22 +1,24 @@
-// See http://docs.sequelizejs.com/en/latest/docs/models-definition/
-// for more of what you can do here.
-const Sequelize = require('sequelize');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const DataTypes = Sequelize.DataTypes;
+const ProductSchema = new Schema({
+  name: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  image: {
+    type: String,
+    trim: true,
+  },
+  price:{
+    type: Number,
+    trim: true,
+    required: true
+  }
 
-module.exports = (sequelize) => {
-  const users = sequelize.define("users", {
-   name: {
-      type: DataTypes.STRING,
-    },
-    image: {
-      type: DataTypes.STRING,
-    },
-    price: {
-      type: DataTypes.INTEGER
-    }
 
-  });
+});
+// hash user password before saving into database
 
-  return users;
-};
+module.exports = mongoose.model('Product', ProductSchema);
