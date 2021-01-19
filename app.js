@@ -6,6 +6,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const fileUploadRouter = require('./routes/fileUpload');
+const paymentRouter = require('./routes/payment');
 const usersRouter = require('./routes/users');
 const productRouter = require('./routes/product');
 const mongoose = require('./config/mongoose');
@@ -27,6 +28,7 @@ app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/product', productRouter);
 
+app.use('/payment', paymentRouter);
 
 app.use('/file', fileUploadRouter);
 
